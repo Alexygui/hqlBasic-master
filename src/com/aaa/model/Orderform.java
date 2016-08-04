@@ -1,6 +1,7 @@
 package com.aaa.model;
 
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Orderform entity. @author MyEclipse Persistence Tools
@@ -17,19 +18,27 @@ public class Orderform implements java.io.Serializable {
 	}
 
 	private Integer id;
-	private Integer customer;
+	private Customer customer;
 	private Date tradedate;
 	private String status;
 	private Double amount;
-
+	private Set<Orderitem> orderitems;//订单明细
 	// Constructors
+
+	public Set<Orderitem> getOrderitems() {
+		return orderitems;
+	}
+
+	public void setOrderitems(Set<Orderitem> orderitems) {
+		this.orderitems = orderitems;
+	}
 
 	/** default constructor */
 	public Orderform() {
 	}
 
 	/** full constructor */
-	public Orderform(Integer customer, Date tradedate, String status, Double amount) {
+	public Orderform(Customer customer, Date tradedate, String status, Double amount) {
 		this.customer = customer;
 		this.tradedate = tradedate;
 		this.status = status;
@@ -46,11 +55,11 @@ public class Orderform implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Integer getCustomer() {
+	public Customer getCustomer() {
 		return this.customer;
 	}
 
-	public void setCustomer(Integer customer) {
+	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
 

@@ -22,6 +22,13 @@ public class Seller implements java.io.Serializable {
 	public Seller() {
 	}
 
+	public Seller(String name, String tel, String address) {
+		super();
+		this.name = name;
+		this.tel = tel;
+		this.address = address;
+	}
+
 	/** full constructor */
 	public Seller(String name, String tel, String address, String website, Integer star, String business) {
 		this.name = name;

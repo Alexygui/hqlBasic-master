@@ -17,12 +17,12 @@ public class OrderTest {
 	
 	@Test
 	public void testWhere1(){
-		String hql = " from Order o where o.orderItems is not empty ";
+		String hql = " from Orderform o where o.orderitems is not empty ";
 		Query query = session.createQuery(hql);
 		List<Orderform> orders = query.list();
 		
 		for(Orderform order : orders){
-			System.out.println(order.getCustomer());
+			System.out.println(order.getCustomer().getName());
 			System.out.println(order.getAmount());
 			System.out.println(order.getTradedate());
 		}

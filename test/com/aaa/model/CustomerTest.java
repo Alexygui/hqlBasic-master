@@ -40,7 +40,7 @@ public class CustomerTest {
 	
 	@Test
 	public void testWhere3(){
-		String hql = " from Customer c where c.address like '%����%'";
+		String hql = " from Customer c where c.address like '%北京%'";
 		Query query = session.createQuery(hql);
 		List<Customer> customers = query.list();
 		
@@ -64,7 +64,7 @@ public class CustomerTest {
 	
 	@Test
 	public void testWhere1(){
-		String hql = "  from Customer c where c.sex<>'��'";
+		String hql = "  from Customer c where c.description is null";
 		Query query = session .createQuery(hql);
 		List<Customer> customers = query.list();
 		

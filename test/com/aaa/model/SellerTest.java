@@ -17,41 +17,41 @@ public class SellerTest {
 	
 	@Test
 	public void testSelectClauseSelf(){
-		String hql = " select new Seller(s.name,s.tel,s.address) from Seller s ";
-		Query query = session.createQuery(hql);
+		String hqlString = "select new Seller(s.name, s.tel, s.address) from Seller as s";
+		Query query = session.createQuery(hqlString);
 		List<Seller> sellers = query.list();
-		
-		for(Seller seller : sellers){
-			System.out.println("name: "+seller.getName());
-			System.out.println("tel:"+seller.getTel());
-			System.out.println("address:"+seller.getAddress());
+		for(Seller aSeller : sellers) {
+			System.out.println(aSeller.getName());
+			System.out.println(aSeller.getTel());
+			System.out.println(aSeller.getAddress());
 		}
 	}
 	
 	@Test
 	public void testSelectClauseMap(){
-		String hql = " select new map(s.name,s.tel,s.address) from Seller s ";
-		Query query =session.createQuery(hql);
-		
+		String hql = "select new Map(s.name as name, s.tel as tel, s.address as address) from Seller as s";
+		Query query = session.createQuery(hql);
 		List<Map> maps = query.list();
 		for(Map map : maps){
-			System.out.println("name:"+map.get("0"));
-			System.out.println("tel:"+map.get("1"));
-			System.out.println("address:"+map.get("2"));
+			System.out.println(map.get("name"));
+			System.out.println(map.get("tel"));
+			System.out.println(map.get("address"));
 		}
 	}
 	
+	/**
+	 * 用list保存seller的name, tel, address
+	 */
 	@Test
 	public void testSelectClauseList(){
-		String hql = " select new list(s.name,s.tel,s.address) from Seller s ";
-		
+		//"Seller"的"S"要大写，这指的不是sql表中的seller表，而是Seller.java中的类
+		String hql = " select new List(s.name,s.tel,s.address) from Seller s ";
 		Query query = session.createQuery(hql);
 		List<List> lists = query.list();
-		
-		for(List list : lists){
-			System.out.println("name : "+list.get(0));
-			System.out.println("tel:"+list.get(1));
-			System.out.println("address:"+list.get(2));
+		for(List list : lists) {
+			System.out.println("name: " + list.get(0));
+			System.out.println("name: " + list.get(1));
+			System.out.println("name: " + list.get(2));
 		}
 	}
 	
@@ -60,20 +60,23 @@ public class SellerTest {
 	 */
 	@Test
 	public void testSelectClauseObjectArray(){
-		String hql = " select s.name from Seller s ";
+		String hql = " select s.name, s.tel, s.address, s.star from Seller s ";
 		
 		Query query = session.createQuery(hql);
 		
-		List<Object> list = query.list();
+		List<Object[]> list = query.list();
 		
-		for(Object obj : list){
-			System.out.println("name:"+obj);
+		for(Object[] objs : list){
+			System.out.println("name:"+objs[0]);
+			System.out.println("tel:"+objs[1]);
+			System.out.println("address:"+objs[2]);
+			System.out.println("star:"+objs[3]);
 		}
 	}
 	
 	@Test
 	public void testFromClause(){
-		String hql = " from Seller  s ";
+		String hql = " from Seller  as seller ";
 		
 		Query query = session.createQuery(hql);
 		
